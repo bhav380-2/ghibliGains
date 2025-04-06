@@ -1,7 +1,10 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import express from "express";
 import client from "./config/redis";
 
-const PORT = 8088;
+const PORT = process.env.PORT || 8088;
 const app = express();
 
 const cache = async (key: string, value: string) => {
@@ -14,10 +17,9 @@ app.get("/cache", async (req, res) => {
   res.send(`<h3>cache done go to api point  getcache to see result</h3>`);
 });
 
-app.get("/getcache", async(req ,res)=>{
-    res.send(`<h1> ${await client.get("redisKey")}</h1>`)
-
-})
+app.get("/getcache", async (req, res) => {
+  res.send(`<h1> ${await client.get("redisKey")}</h1>`);
+});
 
 app.listen(PORT, (err) => {
   if (err) {
