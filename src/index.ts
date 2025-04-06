@@ -11,6 +11,10 @@ const cache = async (key: string, value: string) => {
   await client.set(key, value);
 };
 
+
+app.get("/",async(req , res)=>{
+  res.send("<h1> RUNNING  </h1>")
+})
 app.get("/cache", async (req, res) => {
   const key = "redisKey";
   await cache(key, "Welcome to GhibliGains");
